@@ -4,7 +4,8 @@
   "description": "A tool that sequencing barcode check for Illumina of SOEASY toolkit",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ./"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/BaconKwan/EzSBCI/issues"
   },
-  "homepage": "https://github.com/BaconKwan/EzSBCI#readme"
+  "homepage": "https://github.com/BaconKwan/EzSBCI#readme",
+  "dependencies": {
+    "electron": "^1.8.6"
+  }
 }
