@@ -1,12 +1,8 @@
 const electron = require('electron');
 // 控制应用生命周期的模块。
-const {
-    app
-} = electron;
+const {app} = electron;
 // 创建原生浏览器窗口的模块。
-const {
-    BrowserWindow
-} = electron;
+const {BrowserWindow} = electron;
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
