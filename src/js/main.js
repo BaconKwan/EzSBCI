@@ -59,9 +59,17 @@ ipcMain.on('upload-dialog', function (event) {
         if (files) {
             var path = files[0];
             event.sender.send('upload-reply-path', path);
-            var csv = Papa.parse(fs.open(path));
-            console.log(csv);
-            event.sender.send('upload-reply-array');
+            fs.readFile(path, 'utf8', function (err, data) {
+                if(err) {
+                    event.sender.send('upload-reply-err');
+                    return console.log(err);
+                }
+                else{
+                    var csv = Papa.parse(data, {header: true});
+                    console.log(csv);
+                    event.sender.send('upload-reply-csv', csv);
+                }
+            });
         }
     });
 });

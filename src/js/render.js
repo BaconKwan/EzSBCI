@@ -3,7 +3,7 @@ var ts = new Vue({
     data: {
         current: 0,
         status: 'process',
-        list: [['上传', '上传SampleSheet文件'], ['填写', '填写各个样品的数据量'], ['结果', '显示评估结果']],
+        list: [{title: '上传', msg: '请上传SampleSheet文件'}, {title: '填写', msg: '填写各个样品的数据量'}, {title: '结果', msg: '显示评估结果'}],
     }
 });
 
@@ -27,10 +27,20 @@ var uf = new Vue({
             ipcRenderer.on('upload-reply-path', function(event, arg) {
                 uf.file = arg;
             });
-            ipcRenderer.on('upload-reply-array', function(event, arg) {
+            ipcRenderer.on('upload-reply-csv', function(event, arg) {
+                ts.current = 1;
+                ts.status = 'process';
+                ts.list[0]['msg'] = '文件上传成功';
                 dt.show = true;
-                dt.line = arg;
-            })
+                dt.line = arg.data;
+            });
+            ipcRenderer.on('upload-reply-err', function(event, arg) {
+                ts.current = 0;
+                ts.status = 'error';
+                ts.list[0]['msg'] = '文件上传失败';
+                dt.show = false;
+                dt.line = [];
+            });
         }
     }
 })

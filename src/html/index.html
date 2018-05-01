@@ -17,10 +17,10 @@
         <div class="ivu-col-span-6">
             <!-- Steps status: wait、process、finish、error -->
             <Steps :current="current" :status="status" direction="vertical" id="ts">
-                <step v-for="item of list" :title="item[0]" :content="item[1]"></step>
+                <step v-for="item of list" :title="item['title']" :content="item['msg']"></step>
             </Steps>
         </div>
-        <div class="ivu-col-offset-1 ivu-col-span-17">
+        <div class="ivu-col-span-18">
             <div v-show="show" id="uf">
                 <div class="ivu-row">
                     <i-Button type="ghost" icon="ios-cloud-upload-outline" @click="upload()">Upload files</i-Button>
@@ -39,10 +39,10 @@
                         </thead>
                         <tbody>
                             <tr v-for="item of line">
-                                <td class="ivu-table-column-center">{{item[0]}}</td>
-                                <td class="ivu-table-column-center">{{item[1]}}</td>
-                                <td class="ivu-table-column-center">{{item[2]}}</td>
-                                <td class="ivu-table-column-center">{{item[3]}}</td>
+                                <td class="ivu-table-column-center">{{item['Sample_ID']}}</td>
+                                <td class="ivu-table-column-center">{{item['Sample_Name']}}</td>
+                                <td class="ivu-table-column-center">{{item['index']}}</td>
+                                <td class="ivu-table-column-center">{{item['index2']}}</td>
                                 <td class="ivu-table-column-center"><input type="text" :value="1"></td>
                             </tr>
                         </tbody>
