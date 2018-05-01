@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>EzSBCI</title>
+    <!-- import stylesheet -->
+    <link rel="stylesheet" href="../css/iview.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- import javascript -->
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/iview.min.js"></script>
+</head>
+
+<body id="app">
+    <div class="ivu-row">
+        <div class="ivu-col-span-6">
+            <!-- Steps status: wait、process、finish、error -->
+            <Steps :current="current" :status="status" direction="vertical" id="ts">
+                <step v-for="item of list" :title="item[0]" :content="item[1]"></step>
+            </Steps>
+        </div>
+        <div class="ivu-col-offset-1 ivu-col-span-17">
+            <div v-show="show" id="uf">
+                <div class="ivu-row">
+                    <i-Button type="ghost" icon="ios-cloud-upload-outline" @click="upload()">Upload files</i-Button>
+                    <p id="path">SampleSheet文件: {{file}}</p>
+                </div>
+            </div>
+            <div v-show="show" id="dt">
+                <div class="ivu-row">
+                    <table class="ivu-table-small" style="width:100%">
+                        <thea>
+                            <th>Sample_ID</th>
+                            <th>Sample_Name</th>
+                            <th>I7_index</th>
+                            <th>I5_index</th>
+                            <th>Volume(Gb)</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item of line">
+                                <td class="ivu-table-column-center">{{item[0]}}</td>
+                                <td class="ivu-table-column-center">{{item[1]}}</td>
+                                <td class="ivu-table-column-center">{{item[2]}}</td>
+                                <td class="ivu-table-column-center">{{item[3]}}</td>
+                                <td class="ivu-table-column-center"><input type="text" :value="1"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- import javascript to render main page -->
+    <script src="../js/render.js"></script>
+</body>
+
+</html>

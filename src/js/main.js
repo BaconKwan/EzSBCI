@@ -1,8 +1,4 @@
-const electron = require('electron');
-// 控制应用生命周期的模块。
-const {app} = electron;
-// 创建原生浏览器窗口的模块。
-const {BrowserWindow} = electron;
+const {app, BrowserWindow} = require('electron');
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
@@ -10,16 +6,13 @@ let mainWindow;
 
 function createWindow() {
     // 创建浏览器窗口。
-    mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600
-    });
+    mainWindow = new BrowserWindow({width: 1366, height: 768});
 
     // 加载应用的 index.html。
-    mainWindow.loadURL(`file://${__dirname}/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/../html/index.html`);
 
     // 启用开发工具。
-    //mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     // 当 window 被关闭，这个事件会被触发。
     mainWindow.on('closed', () => {
@@ -54,3 +47,21 @@ app.on('activate', () => {
 
 // 在这文件，你可以续写应用剩下主进程代码。
 // 也可以拆分成几个文件，然后用 require 导入。
+const ipcMain = require('electron').ipcMain;
+const dialog  = require('electron').dialog;
+const fs      = require('fs');
+const Papa    = require('papaparse');
+
+ipcMain.on('upload-dialog', function (event) {
+    dialog.showOpenDialog({
+        properties: ['openFile']
+    }, function (files) {
+        if (files) {
+            var path = files[0];
+            event.sender.send('upload-reply-path', path);
+            var csv = Papa.parse(fs.open(path));
+            console.log(csv);
+            event.sender.send('upload-reply-array');
+        }
+    });
+});
