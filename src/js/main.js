@@ -12,7 +12,7 @@ function createWindow() {
     mainWindow.loadURL(`file://${__dirname}/../html/index.html`);
 
     // 启用开发工具。
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     // 当 window 被关闭，这个事件会被触发。
     mainWindow.on('closed', () => {
@@ -66,8 +66,12 @@ ipcMain.on('upload-dialog', function (event) {
                 }
                 else{
                     var csv = Papa.parse(data, {header: true});
-                    console.log(csv);
-                    event.sender.send('upload-reply-csv', csv);
+                    if ((csv.meta.fields.indexOf("Sample_ID") + csv.meta.fields.indexOf("Sample_Name") + csv.meta.fields.indexOf("index") + csv.meta.fields.indexOf("index2")) == -4) {
+                        event.sender.send('upload-reply-err');
+                    }
+                    else{
+                        event.sender.send('upload-reply-csv', csv);
+                    }
                 }
             });
         }

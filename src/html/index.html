@@ -19,18 +19,20 @@
             <Steps :current="current" :status="status" direction="vertical" id="ts">
                 <step v-for="item of list" :title="item['title']" :content="item['msg']"></step>
             </Steps>
+            <i-Button v-show="show" id="run" type="ghost" icon="ios-checkmark-outline" @click="check()">检查</i-Button>
+            <i-Button v-show="show" id="back" type="ghost" icon="refresh" @click="back()">返回</i-Button>
         </div>
         <div class="ivu-col-span-18">
             <div v-show="show" id="uf">
                 <div class="ivu-row">
-                    <i-Button type="ghost" icon="ios-cloud-upload-outline" @click="upload()">Upload files</i-Button>
-                    <p id="path">SampleSheet文件: {{file}}</p>
+                    <i-Button type="ghost" icon="ios-cloud-upload-outline" @click="upload()">上传文件</i-Button>
+                    <p>SampleSheet文件: {{file}}</p>
                 </div>
             </div>
             <div v-show="show" id="dt">
                 <div class="ivu-row">
                     <table class="ivu-table-small" style="width:100%">
-                        <thea>
+                        <thead>
                             <th>Sample_ID</th>
                             <th>Sample_Name</th>
                             <th>I7_index</th>
@@ -43,7 +45,33 @@
                                 <td class="ivu-table-column-center">{{item['Sample_Name']}}</td>
                                 <td class="ivu-table-column-center">{{item['index']}}</td>
                                 <td class="ivu-table-column-center">{{item['index2']}}</td>
-                                <td class="ivu-table-column-center"><input type="text" :value="1"></td>
+                                <td class="ivu-table-column-center"><input type="text" v-model="item['Volume']" :value="item['Volume']"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div v-show="show" id="Pstat">
+                <div class="ivu-row">
+                    <h3>最小错配数检查</h3>
+                    <p>{{msg}}</p>
+                    <ul v-show="mmcheck">
+                        <li v-for="item of mm">{{item}}</li>
+                    </ul>
+                </div>
+                <div class="ivu-row">
+                    <h3>碱基不平衡检查</h3>
+                    <table class="ivu-table-small" style="width:100%">
+                        <thead>
+                            <th>Position</th>
+                            <th>A/C Ratio(%)</th>
+                            <th>G/T Ratio(%)</th>
+                        </thead>
+                        <tbody>
+                            <tr :style="item['class']" v-for="(item, index) of data">
+                                <td class="ivu-table-column-center">{{index + 1}}</td>
+                                <td class="ivu-table-column-center">{{item['AC']}}</td>
+                                <td class="ivu-table-column-center">{{item['GT']}}</td>
                             </tr>
                         </tbody>
                     </table>
