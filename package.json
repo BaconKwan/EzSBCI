@@ -5,7 +5,7 @@
   "main": "src/js/main.js",
   "scripts": {
     "start": "electron ./",
-    "package": "electron-packager ./ EzSBCI --win --out dist --arch=x64 --overwrite --ignore=node_modules --ignore=dist --prune"
+    "package": "electron-packager ./ EzSBCI --win --out dist --arch=x64 --overwrite --ignore=dist --prune"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,9 @@
   },
   "homepage": "https://github.com/BaconKwan/EzSBCI#readme",
   "dependencies": {
-    "electron": "^1.8.6",
     "papaparse": "^4.4.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "electron": "^1.8.6"
+  }
 }

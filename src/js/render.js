@@ -3,7 +3,7 @@ var ts = new Vue({
     data: {
         current: 0,
         status: 'process',
-        list: [{title: '上传', msg: '请上传SampleSheet文件'}, {title: '填写', msg: '填写各个样品的数据量'}, {title: '结果', msg: '显示评估结果'}],
+        list: [{title: '上传', msg: '请上传SampleSheet文件'}, {title: '填写', msg: '填写各个样品的数据量'}, {title: '结果', msg: '显示评估结果'}],
     }
 })
 
