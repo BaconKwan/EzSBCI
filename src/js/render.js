@@ -92,13 +92,13 @@ var run = new Vue({
             var minMisMatch = 999
             dt.line.forEach(element => {
                 var barcode = element["index"] + element["index2"]
-                var name = element["Sample_ID"] + '.' + element["Sample_Name"]
+                var name = element["Sample_ID"]
                 for(var i = 0; i < barcode.length; i++) {
                     if(stats[i] == undefined){
                         function AGCT(AC, GT) {
                             this.AC = Number(AC)
                             this.GT = Number(GT)
-                            this.class = "background-color: #19be6b"
+                            this.class = "background-color: rgba(92,184,92,0.15)"
                         }
                         var obj = new AGCT(0,0)
                         stats.push(obj)
@@ -112,7 +112,7 @@ var run = new Vue({
                 }
                 dt.line.forEach(element2 => {
                     var barcode2 = element2["index"] + element2["index2"]
-                    var name2 = element2["Sample_ID"] + '.' + element2["Sample_Name"]
+                    var name2 = element2["Sample_ID"]
                     if(name == name2) {}
                     else{
                         var misMatch = 0
@@ -154,10 +154,10 @@ var run = new Vue({
                 element['AC'] = (element['AC'] / total).toFixed(2)
                 element['GT'] = (element['GT'] / total).toFixed(2)
                 if(element['AC'] >= 0.65 || element['GT'] >= 0.65){
-                    element['class'] = 'background-color: #ff9900;'
+                    element['class'] = 'background-color: rgba(240,173,78,0.15);'
                 }
                 if (element['AC'] >= 0.8 || element['GT'] >= 0.8){
-                    element['class'] = 'background-color: #ed3f14;'
+                    element['class'] = 'background-color: rgba(237,63,20,0.15);'
                 }
             })
         }

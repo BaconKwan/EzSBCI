@@ -65,8 +65,16 @@ ipcMain.on('upload-dialog', function (event) {
                     return console.log(err);
                 }
                 else{
-                    var csv = Papa.parse(data, {header: true});
-                    if ((csv.meta.fields.indexOf("Sample_ID") + csv.meta.fields.indexOf("Sample_Name") + csv.meta.fields.indexOf("index") + csv.meta.fields.indexOf("index2")) == -4) {
+                    var tmp = data.split(/[\r\n]+/);
+                    var skip = true;
+                    while(skip) {
+                        var item = tmp.shift();
+                        if(item.indexOf('[Data]') == 0){
+                            skip = false
+                        }
+                    }
+                    var csv = Papa.parse(tmp.join('\r\n'), {header: true});
+                    if ('Sample_ID' in csv.meta.fields && 'Sample_Name' in csv.meta.fields && 'index' in csv.meta.fields && 'index2' in csv.meta.fields) {
                         event.sender.send('upload-reply-err');
                     }
                     else{
