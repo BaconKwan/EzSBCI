@@ -1,5 +1,5 @@
 {
-  "name": "ezsbci",
+  "name": "@baconkwan/ezsbci",
   "version": "1.0.0",
   "description": "A tool that sequencing barcode check for Illumina of SOEASY toolkit",
   "main": "src/js/main.js",
