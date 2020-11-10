@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+ssh://git@github.com/BaconKwan/EzSBCI.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "keywords": [
     "barcode",
     "check",
